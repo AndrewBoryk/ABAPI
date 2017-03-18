@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ABAPI_Example' do
+  pod 'ABAPI', :path => '../'
+
+  target 'ABAPI_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
