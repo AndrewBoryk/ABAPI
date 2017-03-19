@@ -30,7 +30,7 @@
 @property (strong, nonatomic) NSError *failureError;
 
 /// Operation received from failed request
-@property (strong, nonatomic) NSURLSessionTask *failureOperation;
+@property (strong, nonatomic) NSURLSessionDataTask *failureTask;
 
 /// Description string for the success part of the response object
 @property (strong, nonatomic, readonly) NSString *successDescription;
@@ -39,10 +39,10 @@
 @property (strong, nonatomic, readonly) NSString *failureDescription;
 
 /// Initializes a ABResponseObject using the success task and the success data response
-- (instancetype)initWithTask:(NSURLSessionDataTask *)task responseObject:(id)responseObject;
+- (instancetype)initWithSuccessTask:(NSURLSessionDataTask *)task responseObject:(id)responseObject;
 
-/// Initializes an ABResponseObject using the failure operation and the error
-- (instancetype)initWithOperation:(NSURLSessionTask *)operation error:(NSError *)error;
+/// Initializes an ABResponseObject using the failure task and the error
+- (instancetype)initWithFailureTask:(NSURLSessionDataTask *)task error:(NSError *)error;
 
 /// Print the description string for the success part of the response object
 - (void)printSuccessDescription;

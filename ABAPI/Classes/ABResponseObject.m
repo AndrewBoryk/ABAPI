@@ -7,6 +7,7 @@
 //
 
 #import "ABResponseObject.h"
+#import "ABAPIConstants.h"
 
 @implementation ABResponseObject
 
@@ -18,14 +19,14 @@
         self.successTask = nil;
         self.successData = nil;
         self.failureError = nil;
-        self.failureOperation = nil;
+        self.failureTask = nil;
         
     }
     
     return self;
 }
 
-- (instancetype)initWithTask:(NSURLSessionDataTask *)task responseObject:(id)responseObject {
+- (instancetype)initWithSuccessTask:(NSURLSessionDataTask *)task responseObject:(id)responseObject {
     NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
     
     self.statusCode = r.statusCode;
@@ -33,11 +34,11 @@
     self.successTask = task;
 }
 
-- (instancetype)initWithOperation:(NSURLSessionTask *)operation error:(NSError *)error {
-    NSHTTPURLResponse* r = (NSHTTPURLResponse*)operation.response;
+- (instancetype)initWithFailureTask:(NSURLSessionDataTask *)task error:(NSError *)error {
+    NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
     
     self.statusCode = r.statusCode;
-    self.failureOperation = operation;
+    self.failureTask = task;
     self.failureError = error;
 }
 
@@ -54,7 +55,7 @@
 - (NSString *)successDataString {
     NSString *data = @"";
     
-    if ([self notNull:self.successData]) {
+    if ([ABAPIConstants notNull:self.successData]) {
         data = [NSString stringWithFormat:@"%@", self.successData];
     }
     
@@ -64,18 +65,18 @@
 - (NSString *)successTaskString {
     NSString *task = @"";
     
-    if ([self notNull:self.successTask]) {
+    if ([ABAPIConstants notNull:self.successTask]) {
         task = [NSString stringWithFormat:@"%@", self.successTask];
     }
     
     return task;
 }
 
-- (NSString *)failureOperationString {
+- (NSString *)failureTaskString {
     NSString *operation = @"";
     
-    if ([self notNull:self.failureOperation]) {
-        operation = [NSString stringWithFormat:@"%@", self.failureOperation];
+    if ([ABAPIConstants notNull:self.failureTask]) {
+        operation = [NSString stringWithFormat:@"%@", self.failureTask];
     }
     
     return operation;
@@ -84,7 +85,7 @@
 - (NSString *)failureErrorString {
     NSString *error = @"";
     
-    if ([self notNull:self.failureError]) {
+    if ([ABAPIConstants notNull:self.failureError]) {
         error = [NSString stringWithFormat:@"%@", self.failureError];
     }
     
@@ -100,14 +101,14 @@
 
 - (NSString *)failureDescription {
     
-    NSString *descriptionString = [NSString stringWithFormat:@"Status Code: %@\nFailure Operation: %@\nFailure Error: %@\n", [self statusCodeString], [self failureOperationString], [self failureErrorString]];
+    NSString *descriptionString = [NSString stringWithFormat:@"Status Code: %@\nFailure Operation: %@\nFailure Error: %@\n", [self statusCodeString], [self failureTaskString], [self failureErrorString]];
     
     return descriptionString;
 }
 
 - (NSString *)description {
 
-    NSString *descriptionString = [NSString stringWithFormat:@"Status Code: %@\nSuccess Data: %@\nSuccess Task: %@\nFailure Operation: %@\nFailure Error: %@\n", [self statusCodeString], [self successDataString], [self successTaskString], [self failureOperationString], [self failureErrorString]];
+    NSString *descriptionString = [NSString stringWithFormat:@"Status Code: %@\nSuccess Data: %@\nSuccess Task: %@\nFailure Operation: %@\nFailure Error: %@\n", [self statusCodeString], [self successDataString], [self successTaskString], [self failureTaskString], [self failureErrorString]];
     
     return descriptionString;
 }
@@ -124,12 +125,4 @@
     NSLog(@"%@", self.description);
 }
 
-- (BOOL)notNull:(id)object {
-    if ([object isEqual:[NSNull null]] || [object isKindOfClass:[NSNull class]] || object == nil) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
 @end

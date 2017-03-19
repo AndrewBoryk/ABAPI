@@ -11,138 +11,87 @@
 
 @implementation ABAPI
 
-+ (NSString *)endpoint {
-    return @"https://api-artavenue.tapt.io/";
-}
-
-+ (NSString *)version {
-    return @"v0";
-}
-
-
--(void)get:(NSString *)url setHeader:(NSDictionary *)header setParameter:(NSDictionary *)param completion:(void (^)(NSDictionary *response, NSError *error))block {
++ (void)get:(NSString *)path setHeader:(NSDictionary *)header setParameter:(NSDictionary *)params progress:(APIProgressBlock)progressBlock completion:(APIResponseBlock)completionBlock {
     
-    if ([ABAPI notNull:url]) {
-        NSString *path = [[[ABAPI endpoint] stringByAppendingString:[ABAPI version]] stringByAppendingString:url];
+    if ([ABAPIConstants isValidPath:path]) {
+        AFHTTPSessionManager *manager = [ABAPI requestManagerWithHeader:header];
         
-        AFHTTPSessionManager *manager = [self requestManagerWithHeader:header];
-        
-        [manager GET:path parameters:param progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-            ABResponseObject *response = [[ABResponseObject alloc] initWithTask:task responseObject:responseObject];
+        [manager GET:path parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+            if (progressBlock) progressBlock(downloadProgress.fractionCompleted);
             
-            if(block) {
-                block(response, nil);
-            }
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            ABResponseObject *response = [[ABResponseObject alloc] initWithSuccessTask:task responseObject:responseObject];
             
-        } failure:^(NSURLSessionTask *operation, NSError *error) {
-            ABResponseObject *response = [[ABResponseObject alloc] initWithOperation:operation error:error];
+            if(completionBlock) completionBlock(response, nil);
             
-            if(block) {
-                block(response, nil);
-            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            ABResponseObject *response = [[ABResponseObject alloc] initWithFailureTask:task error:error];
+            
+            if(completionBlock) completionBlock(response, error);
+            
         }];
-    } else {
-        NSLog(@"URL is nil/null");
     }
     
 }
 
--(void)post:(NSString *)url setHeader:(NSDictionary *)header setParameter:(NSDictionary *)param completion:(void (^)(NSDictionary *response, NSError *error))block {
++ (void)post:(NSString *)path setHeader:(NSDictionary *)header setParameter:(NSDictionary *)params progress:(APIProgressBlock)progressBlock completion:(APIResponseBlock)completionBlock {
     
-    if ([ABAPI notNull:url]) {
-        NSString *path = [[[ABAPI endpoint] stringByAppendingString:[ABAPI version]] stringByAppendingString:url];
+    if ([ABAPIConstants isValidPath:path]) {
+        AFHTTPSessionManager *manager = [ABAPI requestManagerWithHeader:header];
         
-        ABResponseObject *response = [[ABResponseObject alloc] init];
-        
-        AFHTTPSessionManager *manager = [self requestManagerWithHeader:header];
-        
-        
-        [manager POST:path parameters:param progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-            ABResponseObject *response = [[ABResponseObject alloc] initWithTask:task responseObject:responseObject];
+        [manager POST:path parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+            if (progressBlock) progressBlock(uploadProgress.fractionCompleted);
             
-            if(block) {
-                block(response, nil);
-            }
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            ABResponseObject *response = [[ABResponseObject alloc] initWithSuccessTask:task responseObject:responseObject];
             
-        } failure:^(NSURLSessionTask *operation, NSError *error) {
-            ABResponseObject *response = [[ABResponseObject alloc] initWithOperation:operation error:error];
+            if(completionBlock) completionBlock(response, nil);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            ABResponseObject *response = [[ABResponseObject alloc] initWithFailureTask:task error:error];
             
-            if(block) {
-                block(response, nil);
-            }
+            if(completionBlock) completionBlock(response, error);
         }];
-    } else {
-        NSLog(@"URL is nil/null");
     }
-    
-    
     
 }
 
--(void)put:(NSString *)url setHeader:(NSDictionary *)header setParameter:(NSDictionary *)param completion:(void (^)(NSDictionary *response, NSError *error))block {
++ (void)put:(NSString *)path setHeader:(NSDictionary *)header setParameter:(NSDictionary *)params completion:(APIResponseBlock)completionBlock {
     
-    if ([ABAPI notNull:url]) {
-        NSString *path = [[[ABAPI endpoint] stringByAppendingString:[ABAPI version]]stringByAppendingString:url];
+    if ([ABAPIConstants isValidPath:path]) {
+        AFHTTPSessionManager *manager = [ABAPI requestManagerWithHeader:header];
         
-        ABResponseObject *response = [[ABResponseObject alloc] init];
-        
-        AFHTTPSessionManager *manager = [self requestManagerWithHeader:header];
-        
-        [manager PUT:path parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            ABResponseObject *response = [[ABResponseObject alloc] initWithTask:task responseObject:responseObject];
+        [manager PUT:path parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            ABResponseObject *response = [[ABResponseObject alloc] initWithSuccessTask:task responseObject:responseObject];
             
-            if(block) {
-                block(response, nil);
-            }
+            if(completionBlock) completionBlock(response, nil);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            ABResponseObject *response = [[ABResponseObject alloc] initWithFailureTask:task error:error];
             
-        } failure:^(NSURLSessionTask *operation, NSError *error) {
-            ABResponseObject *response = [[ABResponseObject alloc] initWithOperation:operation error:error];
-            
-            if(block) {
-                block(response, nil);
-            }
+            if(completionBlock) completionBlock(response, error);
         }];
-    } else {
-        NSLog(@"URL is nil/null");
     }
-    
-    
     
 }
 
--(void)del:(NSString *)url setHeader:(NSDictionary *)header setParameter:(NSDictionary *)param completion:(void (^)(NSDictionary *response, NSError *error))block {
++ (void)del:(NSString *)path setHeader:(NSDictionary *)header setParameter:(NSDictionary *)params completion:(APIResponseBlock)completionBlock {
     
-    if ([ABAPI notNull:url]) {
-        NSString *path = [[[ABAPI endpoint] stringByAppendingString:[ABAPI version]] stringByAppendingString:url];
+    if ([ABAPIConstants isValidPath:path]) {
+        AFHTTPSessionManager *manager = [ABAPI requestManagerWithHeader:header];
         
-        ABResponseObject *response = [[ABResponseObject alloc] init];
-        
-        AFHTTPSessionManager *manager = [self requestManagerWithHeader:header];
-        
-        [manager DELETE:path parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            ABResponseObject *response = [[ABResponseObject alloc] initWithTask:task responseObject:responseObject];
+        [manager DELETE:path parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            ABResponseObject *response = [[ABResponseObject alloc] initWithSuccessTask:task responseObject:responseObject];
             
-            if(block) {
-                block(response, nil);
-            }
+            if(completionBlock) completionBlock(response, nil);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            ABResponseObject *response = [[ABResponseObject alloc] initWithFailureTask:task error:error];
             
-        } failure:^(NSURLSessionTask *operation, NSError *error) {
-            ABResponseObject *response = [[ABResponseObject alloc] initWithOperation:operation error:error];
-            
-            if(block) {
-                block(response, nil);
-            }
+            if(completionBlock) completionBlock(response, error);
         }];
-    } else {
-        NSLog(@"URL is nil/null");
     }
-    
-    
-    
     
 }
 
-- (AFHTTPSessionManager *)requestManagerWithHeader:(NSDictionary *)header {
++ (AFHTTPSessionManager *)requestManagerWithHeader:(NSDictionary *)header {
     AFSecurityPolicy *policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
     policy.allowInvalidCertificates = YES;
     [policy setValidatesDomainName:NO];
@@ -154,9 +103,9 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
     NSString *userAgent = [manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"];
-    NSString *strApplicationUUID = [self userAgent];
+    NSString *strApplicationUUID = [ABAPI userAgent];
     
-    if ([ABAPI notNull:strApplicationUUID]) {
+    if ([ABAPIConstants notNull:strApplicationUUID]) {
         userAgent = strApplicationUUID;
     }
     
@@ -169,170 +118,20 @@
 //    
 //    manager.responseSerializer.acceptableStatusCodes = [acceptedCodes copy];
     
-    for(id key in header)
-        [manager.requestSerializer setValue:[header objectForKey:key] forHTTPHeaderField:key];
+    if ([ABAPIConstants notNull:header]) {
+        for(id key in header) {
+            if ([ABAPIConstants notNull:[header objectForKey:key]]) {
+                [manager.requestSerializer setValue:[header objectForKey:key] forHTTPHeaderField:key];
+            }
+        }
+    }
+    
     
     return manager;
 }
 
-- (NSString *) userAgent {
-    NSString *version = @"noVersion";
-    NSString *userID = @"noID";
-    
-    if ([ABAPI notNull:[ABAPI version]]) {
-        version = [ABAPI version];
-    }
-    
-    NSString *strApplicationUUID = [NSString stringWithFormat:@" Ver [%@] iOS", version];
-    
-    return strApplicationUUID;
++ (NSString *)userAgent {
+    return nil;
 }
-
-+ (BOOL)notNull:(id)object {
-    if ([object isEqual:[NSNull null]] || [object isKindOfClass:[NSNull class]] || object == nil) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-+ (BOOL)isNull:(id)object {
-    if ([object isEqual:[NSNull null]] || [object isKindOfClass:[NSNull class]] || object == nil) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-+ (BOOL)notNil:(id)object {
-    if (object == nil) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-+ (BOOL)isNil:(id)object {
-    if (object == nil) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-+ (BOOL)notBlank: (NSString *) text {
-    if ([ABAPI notNull:text]) {
-        if (![text isEqualToString:@""]) {
-            return YES;
-        }
-    }
-    
-    return NO;
-}
-
-//
-//-(void)progressPost:(NSString *)url setHeader:(NSDictionary *)header setParameter:(NSDictionary *)param completion:(void (^)(NSDictionary *response, NSError *error))block {
-//
-//    if (![Utils notNull:url]) {
-//        url = @"";
-//    }
-//
-//    NSString *path = [[[Utils apiEndpoint] stringByAppendingString:[Utils apiVersion]] stringByAppendingString:url];
-//
-//    __block NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-//                                           @"",@"httpstatuscode",
-//                                           @"",@"success_data",
-//                                           @"",@"success_operation",
-//                                           @"",@"failure_operation",
-//                                           @"",@"failure_error",
-//                                           nil];
-//
-//    AFSecurityPolicy *policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
-//
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.securityPolicy = policy;
-//
-//
-//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//
-//
-//    NSString *userAgent = [manager.requestSerializer  valueForHTTPHeaderField:@"User-Agent"];
-//    NSString *strApplicationUUID = [self userAgent];
-//
-//    if ([Utils notNull:strApplicationUUID]) {
-//        userAgent = strApplicationUUID;
-//    }
-//
-//    [manager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-//
-//    NSMutableIndexSet *acceptedCodes = [[NSMutableIndexSet alloc]
-//                                        initWithIndexSet:manager.responseSerializer.acceptableStatusCodes];
-//    [acceptedCodes addIndex:404];
-//    [acceptedCodes addIndex:409];
-//
-//    manager.responseSerializer.acceptableStatusCodes = [acceptedCodes copy];
-//
-//
-//
-//    for(id key in header)
-//        [manager.requestSerializer setValue:[header objectForKey:key] forHTTPHeaderField:key];
-//
-//    NSString *postID = [param objectForKey:@"id"];
-//
-//
-//    [manager POST:path parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
-//
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            //Update the progress view
-//            if ([Utils notNull:postID]) {
-//                NSDictionary *progressPost = [[NSDictionary alloc] initWithObjectsAndKeys:postID, @"id", [NSNumber numberWithFloat:uploadProgress.fractionCompleted], @"progress", nil];
-//                NSArray *prog = [[NSArray alloc] initWithObjects:progressPost, nil];
-//
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"Progress Update" object:prog];
-//
-//                UIApplicationState state = [UIApplication sharedApplication].applicationState;
-//
-//                if (uploadProgress.fractionCompleted >= 1.0f && (state == UIApplicationStateBackground || ![[Defaults viewVisible] isEqualToString:@"Discover"])) {
-//                    RLMResults *progressArray = [[PendingPost objectsWhere:@"postID == %@", postID] sortedResultsUsingProperty:@"postID" ascending:YES];
-//
-//                    for (PendingPost *pending in progressArray) {
-//                        [PendingPost deletePost:pending];
-//                    }
-//
-//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"Refresh For Progress" object:prog];
-//                }
-//
-//            }
-//        });
-//
-//
-//
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
-//
-//        result[@"httpstatuscode"] = [NSString stringWithFormat:@"%ld", (long)r.statusCode];
-//        result[@"success_data"] =  responseObject;
-//        //        result[@"success_operation"] = nil;
-//        if(block) {
-//            block(result, nil);
-//        }
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSHTTPURLResponse* r = (NSHTTPURLResponse*)task.response;
-//
-//        result[@"httpstatuscode"] = [NSString stringWithFormat:@"%ld", (long)r.statusCode];
-//
-//        result[@"failure_operation"] = error;
-//        result[@"failure_error"] = error;
-//        if(block) {
-//            block(result, error);
-//        }
-//    }];
-//
-//}
 
 @end

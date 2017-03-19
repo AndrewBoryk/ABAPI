@@ -27,6 +27,10 @@
 		3EE79B0B399EB434AC16AA08BB84A525 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEEB3CDE859F3F412940D15AA031037 /* AFAutoPurgingImageCache.m */; };
 		45591BCD1E7DFFFC00DF6AFB /* ABResponseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 45591BCB1E7DFFFC00DF6AFB /* ABResponseObject.h */; };
 		45591BCE1E7DFFFC00DF6AFB /* ABResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 45591BCC1E7DFFFC00DF6AFB /* ABResponseObject.m */; };
+		45591BD11E7E11BA00DF6AFB /* ABAPIRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 45591BCF1E7E11B900DF6AFB /* ABAPIRequest.h */; };
+		45591BD21E7E11BA00DF6AFB /* ABAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 45591BD01E7E11B900DF6AFB /* ABAPIRequest.m */; };
+		45591BD51E7E16AE00DF6AFB /* ABAPIConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 45591BD31E7E16AE00DF6AFB /* ABAPIConstants.h */; };
+		45591BD61E7E16AE00DF6AFB /* ABAPIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 45591BD41E7E16AE00DF6AFB /* ABAPIConstants.m */; };
 		53EC0D880BD7828957AA1A040FBB6718 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 85053C33AB5B93D2852851105AAA32B1 /* UIProgressView+AFNetworking.m */; };
 		560C829537C2DF44E9F537296580F656 /* Pods-ABAPI_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 31925E7878E63878FB6A17AB027FEDD1 /* Pods-ABAPI_Tests-dummy.m */; };
 		5FAA0927E5E6BAE79FDDBD6958D07576 /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FDE8718B3C2608D30D734C8A15D3D3 /* UIWebView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -113,6 +117,10 @@
 		43581AD63883CAA415A71F817EED5D51 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
 		45591BCB1E7DFFFC00DF6AFB /* ABResponseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABResponseObject.h; sourceTree = "<group>"; };
 		45591BCC1E7DFFFC00DF6AFB /* ABResponseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABResponseObject.m; sourceTree = "<group>"; };
+		45591BCF1E7E11B900DF6AFB /* ABAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAPIRequest.h; sourceTree = "<group>"; };
+		45591BD01E7E11B900DF6AFB /* ABAPIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABAPIRequest.m; sourceTree = "<group>"; };
+		45591BD31E7E16AE00DF6AFB /* ABAPIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAPIConstants.h; sourceTree = "<group>"; };
+		45591BD41E7E16AE00DF6AFB /* ABAPIConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABAPIConstants.m; sourceTree = "<group>"; };
 		456884974FCD65674016A0D296E8D846 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		48135B5C82F8ADDFF57B706DA044EFD7 /* Pods_ABAPI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ABAPI_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C895AC6793F436F61C2EAD864CBE3EE /* Pods-ABAPI_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ABAPI_Tests-frameworks.sh"; sourceTree = "<group>"; };
@@ -304,8 +312,12 @@
 		76F687E5B012AC9D3CEC78F72DC1262B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				45591BD31E7E16AE00DF6AFB /* ABAPIConstants.h */,
+				45591BD41E7E16AE00DF6AFB /* ABAPIConstants.m */,
 				29D60BDA32629332FF080CF0E5E47FCF /* ABAPI.h */,
 				BB16A1DF0EBF75122FF5BC3269FEFA5E /* ABAPI.m */,
+				45591BCF1E7E11B900DF6AFB /* ABAPIRequest.h */,
+				45591BD01E7E11B900DF6AFB /* ABAPIRequest.m */,
 				45591BCB1E7DFFFC00DF6AFB /* ABResponseObject.h */,
 				45591BCC1E7DFFFC00DF6AFB /* ABResponseObject.m */,
 			);
@@ -505,6 +517,8 @@
 			files = (
 				45591BCD1E7DFFFC00DF6AFB /* ABResponseObject.h in Headers */,
 				733471C93E1AA1C03E113FEA3A67BC0F /* ABAPI-umbrella.h in Headers */,
+				45591BD51E7E16AE00DF6AFB /* ABAPIConstants.h in Headers */,
+				45591BD11E7E11BA00DF6AFB /* ABAPIRequest.h in Headers */,
 				A6B5DE4963E7C5F1697C5D34BB819424 /* ABAPI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,7 +672,9 @@
 			files = (
 				F14B8B8EC368CCFAFABE4AD242DE0902 /* ABAPI-dummy.m in Sources */,
 				45591BCE1E7DFFFC00DF6AFB /* ABResponseObject.m in Sources */,
+				45591BD61E7E16AE00DF6AFB /* ABAPIConstants.m in Sources */,
 				02AB32FF444013FCA5FF20A5F5EA46AF /* ABAPI.m in Sources */,
+				45591BD21E7E11BA00DF6AFB /* ABAPIRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
