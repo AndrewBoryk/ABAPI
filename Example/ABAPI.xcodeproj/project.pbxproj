@@ -58,15 +58,15 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		6C9A46A4CD249B7DA8F1A4EA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		6C9A46A4CD249B7DA8F1A4EA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AAFF67BEA21EADD3E72B18AA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		AAFF67BEA21EADD3E72B18AA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		AE2D29BB00CF377326D801A8 /* Pods-ABAPI_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ABAPI_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ABAPI_Example/Pods-ABAPI_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C6503CD48862791FF00633BB /* Pods_ABAPI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ABAPI_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D800EEF0F922A0B7896E19C8 /* Pods-ABAPI_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ABAPI_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ABAPI_Tests/Pods-ABAPI_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		DEECD18914C74BE72466B685 /* Pods_ABAPI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ABAPI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBCE241203EA491EEA10A818 /* ABAPI.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = ABAPI.podspec; path = ../ABAPI.podspec; sourceTree = "<group>"; };
+		EBCE241203EA491EEA10A818 /* ABAPI.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ABAPI.podspec; path = ../ABAPI.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +250,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = andrewboryk;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = EM32C32CW4;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -524,6 +527,7 @@
 			baseConfigurationReference = AE2D29BB00CF377326D801A8 /* Pods-ABAPI_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = EM32C32CW4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ABAPI/ABAPI-Prefix.pch";
 				INFOPLIST_FILE = "ABAPI/ABAPI-Info.plist";
@@ -539,6 +543,7 @@
 			baseConfigurationReference = 1621B532B949D96C498AC988 /* Pods-ABAPI_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = EM32C32CW4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ABAPI/ABAPI-Prefix.pch";
 				INFOPLIST_FILE = "ABAPI/ABAPI-Info.plist";

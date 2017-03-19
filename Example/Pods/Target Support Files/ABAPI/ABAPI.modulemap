@@ -1,0 +1,6 @@
+framework module ABAPI {
+  umbrella header "ABAPI-umbrella.h"
+
+  export *
+  module * { export * }
+}

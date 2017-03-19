@@ -1,0 +1,33 @@
+PODS:
+  - ABAPI (0.1.0):
+    - AFNetworking
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+
+DEPENDENCIES:
+  - ABAPI (from `../`)
+
+EXTERNAL SOURCES:
+  ABAPI:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ABAPI: 43b1cb280334cfee6a8409ce3ec1181fc563413f
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+
+PODFILE CHECKSUM: bb7a4e020b1547da6d3da49b6fd60e1b48518d1c
+
+COCOAPODS: 1.2.0
